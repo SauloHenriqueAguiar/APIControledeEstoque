@@ -11,6 +11,7 @@ module.exports = {
 		define: {
 			timestamps: true
 		},
-		timezone: '-03:00'
+		timezone: '-03:00',
+		
 	}
 }
