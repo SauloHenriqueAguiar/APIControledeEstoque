@@ -21,17 +21,18 @@ const encontrarTodos = async function() {
     const entradas = await entradaRepository.encontrarTodos();
     return entradas;
 }
-const encontrarporid = async function(id) {
-    const entrada = await entradaRepository.encontrarporid(id);
+const encontrarPorId = async function (id) {
+	const entrada = await entradaRepository.encontrarUmPorWhere({ id: id });
 
-    if(!entrada) {
-        return createError(404,'entrada não encontrado');
-    }
-    return entrada;
+	if (!entrada) {
+		return createError(404,  'Entrada não encontrada');
+	}
+	
+	return entrada;
 }
 
 module.exports = {
     criar:criar,
     encontrarTodos:encontrarTodos,
-    encontrarporid:encontrarporid,
+    encontrarPorId:encontrarPorId,
 }

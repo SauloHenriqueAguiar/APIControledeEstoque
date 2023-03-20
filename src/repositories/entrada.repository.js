@@ -1,45 +1,51 @@
-const {Entrada,Item,Usuario} = require('../database/models/index');
+const { Entrada, Item, Usuario, Fornecedor } = require('../database/models/index');
 
-const criar = async function(entrada) {
+const criar = async function (entrada) {
     const entradaCriado = await Entrada.create(entrada);
     return entradaCriado;
 }
 
-const encontrarTodos = async function() {
+const encontrarTodos = async function () {
     const itens = await Entrada.findAll({
         include: [{
             model: Item,
-            as:'item'
-        },{
-            model:Usuario,
-            as:'usuario'
+            as: 'item'
+        }, {
+            model: Usuario,
+            as: 'usuario'
+        }, {
+            model: Fornecedor,
+            as: 'fornecedor'
         }]
     });
     return itens;
 }
-const encontrarporId = async function(id) {
+const encontrarporId = async function (id) {
     const entrada = await Entrada.findByPk(id);
     return entrada;
 }
 
-const encontrarUmPorWhere = async function(where) {
+const encontrarUmPorWhere = async function (where) {
     const entrada = await Entrada.findOne({
-        where:where,
+        where: where,
         include: [{
             model: Item,
-            as:'item'
+            as: 'item'
+        }, {
+            model: Usuario,
+            as: 'usuario'
         },{
-            model:Usuario,
-            as:'usuario'
+			model: Fornecedor,
+			as: 'fornecedor'
         }]
     });
     return entrada;
 }
 
 module.exports = {
-    criar:criar,
+    criar: criar,
     encontrarTodos: encontrarTodos,
-    encontrarporId:encontrarporId,
-    encontrarUmPorWhere:encontrarUmPorWhere,
-    
+    encontrarporId: encontrarporId,
+    encontrarUmPorWhere: encontrarUmPorWhere,
+
 }
